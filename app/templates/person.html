@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron animated fadeInDown" style="padding-top: 20px; padding-bottom: 250px; margin-top: 90px; background-color: #343a40; color: white; margin-bottom: 0;">
+      
+      <h1 class="display-4">{{person['name']}} </h1>
+      
+      <!-- <h5>
+        {% for job in jobs %}
+          {{ job }}{{ "," if not loop.last }}
+          {% endfor %}
+      </h5> -->
+      
+      <hr class="my-4">
+      <div class="actorWrap">
+        <div style="width: 30%;">
+          <div style="position: sticky; top: 70px;">
+            {% if person['img'] %}
+            <img src = "{{ person['img'] }}" width="100%" alt="" ">
+            {% else %}
+            <img src = "https://m.media-amazon.com/images/G/01/imdb/images/nopicture/medium/name-2135195744._CB466677935_.png" width="100%" alt="" ">
+            {% endif %}
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; padding: 30px; padding-top: 0; width: 70%;">
+          <div style="width: 100%; margin-bottom: 30px;">
+            {{person['body']}}...
+  
+            <a href="https://www.imdb.com/name/{{person['Source_id']}}/bio">Read More</a>
+          </div>
+
+        <div style="padding-left: 10px; display: flex; height: 300px;
+        overflow-y:auto; width: 100%; justify-content: space-between;">
+          {% if as_director %}
+          <div class="actorFlex">
+            <h1>Directed</h1>
+            {% for film in as_director %}
+            <ul style="margin: 0; margin-left: 15px;
+            padding: 0;">
+              <li style="margin-bottom: 4px;">
+                <a style="color: orange;" href="../movie/{{film['id']}}">{{film['title']}}</a>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+          {% endif %}
+  
+
+        {% if as_actor %}
+          <div class="actorFlex">
+            <h1>Starred In</h1>
+            {% for film in as_actor %}
+            <ul style="margin: 0; margin-left: 15px;
+            padding: 0;">
+              <li style="margin-bottom: 4px;">
+                <a style="color: orange;" href="../movie/{{film['id']}}">{{film['title']}}</a>
+              </li>
+            </ul>
+          {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+            
+        </div>
+       
+      </div>
+
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col">
+            <img src = "{{ person['img'] }}" width="50%" alt="">
+           
+    
+          </div>
+          <div class="col">
+            <table class="table table-borderless" >
+              <tbody>
+                {% for job in jobs %}
+                {{ job }}
+                {% endfor %}
+                <tr>
+                  {% if as_director %}
+                  <th scope="col" style="color: white; ">As a Director: <span style="font-weight: 100; color: white;">
+                    {% for film in as_director %}
+                     {{film['title']}}
+                    {% endfor %}
+                  </span></th>
+                  {% endif %}
+                </tr>
+                <tr>
+                  {% if as_actor %}
+                  <th scope="col" style="color: white; ">As a Star: <span style="font-weight: 100; color: white;">
+                    {% for film in as_actor %}
+                     {{film['title']}}
+                    {% endfor %}
+                  </span></th>
+                  {% endif %}
+                </tr>
+                <tr>
+                  
+                </tr>
+                <tr>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div> -->
+    
+    
+    
+    
+    </div>
+    </div>
+
+{% endblock %}

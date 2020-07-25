@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+
+
+
+
+{% block content %}
+
+<div class="jumbotron animated fadeInDown" style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Search results for "{{q}}"</h1>
+    <p class="lead"> There are overal {{lenght}} search results for "{{q}}".   </p>
+</div>
+
+
+<div style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container searchFlex">
+
+        
+            
+          {% for person in persons %}
+          
+          <div class="cardFlex animated fadeInDown card shad text-white bg-dark mb-3" >
+              {% if person['img'] %}
+                <img class="card-img-top poster" src="{{person['img']}}" alt="Card image">
+              {% else %}
+                <img class="card-img-top poster" src="https://m.media-amazon.com/images/G/01/imdb/images/nopicture/medium/name-2135195744._CB466677935_.png" alt="Card image">
+              {% endif %}
+                <div class="card-body">
+                <h4 class="card-title">{{person['name']}}</h4>
+                <a href="/persons/{{person['id']}}" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+   
+    </div>
+</div>
+
+
+{% set number = p | int %}
+
+
+<div class="jumbotron"  style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            
+            <a style="margin-right: 10px;" class="btn btn-warning {% if p == 1 %}btn disabled{% endif %} " href="?query={{q}}&page={{number-1}}&type=person" aria-label="Previous">
+                <span  aria-hidden="true">< Previous</span>
+            </a>
+            
+          </li>
+          <li class="page-item">
+            
+            <a class="btn btn-warning {% if number == pageCount %}btn disabled{% endif %}{% if 0 == pageCount %}btn disabled{% endif %} " href="?query={{q}}&page={{number+1}}&type=person" aria-label="Previous">
+                <span  aria-hidden="true">Next ></span>
+            </a>
+            
+          </li>
+    
+        
+        </ul>
+      </nav>
+  </div>
+
+
+
+
+
+
+{% endblock %}

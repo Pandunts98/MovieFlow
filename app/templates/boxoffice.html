@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron" style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Highest-Grossing Movies</h1>
+    <p class="lead">Highest-grossing movies of all time domestically, unadjasted for inflation.</p>
+</div>
+
+<div style="padding-top: 40px; padding-bottom: 30px;">
+  <div class="container">
+    {% for j in range(10) %}
+      <div class="card-deck">
+        {% for i in range(4) %}
+        <div class="animated fadeInDown card shad text-white bg-dark mb-3" >
+              <img class="card-img-top poster" src="{{films[i+4*j]['img']}}" alt="Card image">
+              <div class="card-body">
+              <h4 class="card-title">{{films[i+4*j]['title']}} <span style="color: orange;">{{'%0.1f'|format(films[i+4*j]['rate'])}}</span></h4>
+              <p class="card-text">{{films[i+4*j]['genres']}}</p>
+              <a href="/movie/{{films[i+4*j]['id']}}" class="btn btn-warning">Learn More</a>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

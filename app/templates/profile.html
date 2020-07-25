@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron animated fadeInDown" style="display: flex; padding-top: 20px; padding-bottom: 20px; margin-top: 90px; background-color: #343a40; color: white; margin-bottom: 0;">
+        
+        <h1 >{{username}}</h1>
+        <p style="margin-left: 20px;"> 
+            {% if followers|count %}
+            {% if session['__auth']==username %}
+            <a href="" style="color: white;" data-toggle="modal" data-target="#followers">Followers: {{followers|count}}</a>
+            {%else%}
+            <span>Followers: {{followers|count}}</span>
+            {%endif%}
+            
+            {%else%}
+            Followers: 0
+            {%endif%}
+        </p> 
+        <p style="margin-left: 20px;">
+            {% if followings|count %}
+            {% if session['__auth']==username %}
+             
+            <a href="" style="color: white;" data-toggle="modal" data-target="#followings">Followings: {{followings|count}}</a>
+            {%else%}
+            <span>Followings: {{followings|count}}</span>
+            {%endif%}
+            {%else%}
+            Followings: 0
+            {%endif%}
+        </p> 
+        
+        
+    
+    
+  
+       
+        <hr class="my-4">
+        {% if (username == session['__auth']) %}
+        <button onclick="location.href='/favorites'" class="btn btn-success profb">Favorites</button> 
+        <button onclick="location.href='/watchlater'" class="btn btn-warning profb">Watch Later</button> 
+
+        {%else%}
+        {% if is_following %}
+        <button onclick="location.href='/unfollow/{{username}}'" class="btn btn-warning profb">Unfollow</button>
+        {%else%}
+        <button onclick="location.href='/follow/{{username}}'" class="btn btn-success profb">Follow</button>
+        {%endif%}
+
+        {%endif%}
+        <button onclick="location.href='./flows'" class="btn btn-primary profb">Flow List</button>
+        
+   
+    </div>
+    <div class="jumbotron animated fadeInDown" style="padding-top: 20px; padding-bottom: 40px; margin-top: 10px; background-color: #343a40; color: white; margin-bottom: 0;">
+    <!-- <h1 style="margin: 0; padding: 0;">Reviews</h1> -->
+    <h1 >Reviews</h1>
+    
+    {% if reviews %}
+    
+    <div style="display: flex; width: 100%; flex-wrap: wrap; flex-direction: row; justify-content: flex-start; margin: 0; margin-top: 70px;">
+        {% for review in reviews%}
+        <div class="Rev">
+            <div>
+              <span style='color: orange;'>{{'%0.1f'|format(review['rate'])}}</span>
+            <span><h5><a href="/movie/{{review['id']}}" style="color: black">{{review['name']}}</a></h5><h6 class="mb-2 text-muted">{{review['date']}} ago</h6>
+            </span>
+                
+                <hr>
+                <span style="font-weight: 1;">{{review['body']}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+    
+        
+    <div class="jumbotron"  style="background-color: #343a40; color: white; margin-bottom: 0;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                
+                <a style="margin-right: 10px;" class="btn btn-warning {% if page == 1 %}btn disabled{% endif %} " href="?page={{page-1}}" aria-label="Previous">
+                    <span  aria-hidden="true">< Previous</span>
+                </a>
+                
+              </li>
+              <li class="page-item">
+                
+                <a class="btn btn-warning {% if page == pageCount %}btn disabled{% endif %} " href="?page={{page+1}}" aria-label="Previous">
+                    <span  aria-hidden="true">Next ></span>
+                </a>
+                
+              </li>
+        
+            
+            </ul>
+          </nav>
+      </div>
+
+      {%else%}
+
+      
+        
+    <div class="warning">
+        <div>
+            This user hasn't written a review yet.
+        <span><h5></h5><h6 class="mb-2 text-muted"></h6>
+        </span>
+            
+            <hr>
+            <span style="font-weight: 1;">Browse more <a href="/top" >movies!</a></span>
+        </div>
+    </div>
+   
+
+
+    </div>
+    
+    
+
+
+    {% endif %}
+
+    </div>
+</div>
+
+
+  <div class="modal fade" id="followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Followers</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul>
+
+            
+            {% for follower in followers %}
+            <li><a href="{{ url_for('profile', username=follower['name'])}}">{{ follower['name'] }}</a></li>
+            
+        {% endfor %}
+    </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="modal fade" id="followings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Followings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul>
+
+            
+            {% for following in followings %}
+            <li><a href="{{ url_for('profile', username=following['name'])}}">{{ following['name'] }}</a></li>
+            
+        {% endfor %}
+    </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+​​
+
+{% endblock %}

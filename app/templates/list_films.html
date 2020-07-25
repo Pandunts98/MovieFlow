@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="well">
+
+
+<div class="jumbotron animated fadeInDown" style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4"><span style="color: #ffc107">{{watchlists['name']}}</span> Flow</h1>
+    <p class="lead">{{watchlists['body']}}</p>
+    {% if session['__auth']==username %}
+        {% if watchlists['private'] %}
+        <a href="/flow/{{list_name}}/public" class="btn btn-warning">Make Flow Public</a>
+        {%else%}
+        <a href="/flow/{{list_name}}/private" class="btn btn-warning">Make Flow Private</a>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+<div style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container searchFlex">
+
+        
+            
+          {% for film in films %}
+          
+          <div class="cardFlex animated fadeInDown card shad text-white bg-dark mb-3" >
+                <img class="card-img-top poster" src="{{film['img']}}" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">{{film['title']}} </h4>
+                <p class="card-text">{{film['genres']}}</p>
+                <a href="/movie/{{film['id']}}" class="btn btn-warning">Learn More</a>
+                {% if session['__auth']==username %}
+                <a style="margin-left: 5px;" href="/flow/{{list_name}}/{{film['id']}}/delete" class="btn btn-danger">X</a>
+                {%endif%}
+            </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+   
+    </div>
+</div>
+</div>
+
+
+{% endblock %} 

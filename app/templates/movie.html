@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+​
+{% block content %}
+​
+<div style="padding-top: 150px;" class="well2">
+<script>
+  const rate = () => {
+    value = document.getElementById("rating").value
+    id = document.getElementById("movieid").innerHTML
+    link = "/rate/"+id+"/"+value
+    window.location.href = link;
+​
+  }
+​
+  const del = () => {
+    id = document.getElementById("movieid").innerHTML
+    link = '/delete_rate/'+id;
+    window.location.href = link;
+​
+  }
+​
+​
+</script>
+​
+<div class="container">
+  <div class="jumbotron animated fadeInDown"
+    style="position: relative; padding-top: 20px; padding-bottom: 70px; margin-top: 0px; background-color: #343a40; color: white; margin-bottom: 0;">
+    {% if film['title'] %}
+    <h1 class="display-4">{{ film['title'] }} ({{film['year']}}) <span
+        style="color: orange; position: absolute; right: 25px; top: 10;"><span style="font-size: 70%;">{{ '%0.1f'|format(film['rate']) }}</span><span style="color: grey; font-size: 80%;">/10</span></span></h1>
+    {% endif %}
+    <p class="lead">Movies /
+      {% for genre in genres %}
+      {{ genre["genre"] }}{{ "," if not loop.last }}
+      {% endfor %}
+    </p>
+    <hr class="my-4">
+​
+    <div class="container">
+      <div class="row">
+        <div class="col">
+​
+          <div class="flip-card">
+            <div id="flip-card-inner">
+              <div class="flip-card-front">
+                {% if film['img'] %}
+                <img src="{{ film['img'] }}" width="100%" alt="">
+                {% else %}
+                <img
+                  src="https://m.media-amazon.com/images/G/01/imdb/images/nopicture/medium/film-3385785534._CB468454186_.png"
+                  width="100%" alt="">
+                {% endif %}
+              </div>
+              <div class="flip-card-back">
+                <h1 id="name" style="font-family: 50%;">John Doe</h1>
+                <img id="img" src=""></p>
+              </div>
+            </div>
+          </div>
+​
+​
+​
+        </div>
+        <div class="col">
+          <table class="table table-borderless">
+            <tbody>
+              {% if film['trailer'] %}
+              <tr>
+                <th scope="col" style="color: white; "> <a href="{{film['trailer']}}">Discover the trailer!</a> <span style="font-weight: 100; color: white;">
+                   
+                  </span></th>
+              </tr>
+              {% endif %}
+              {% if directors %}
+              <tr>
+                <th scope="col" style="color: white; ">Director: <span style="font-weight: 100; color: white;">
+                    {% for director in directors %}
+                    <a href="/person/{{director['id']}}">{{ director["name"] }}{{ "," if not loop.last }}</a>
+​
+​
+                    {% endfor %}
+                  </span></th>
+              </tr>
+              {% endif %}
+              {% if actors %}
+              <tr>
+                <th scope="col" style="color: white; ">Stars: <span style="font-weight: 100; color: white;">
+                    {% for actor in actors %}
+                    <a href="/person/{{actor['id']}}">{{ actor["name"] }}{{ "," if not loop.last }}</a>
+                    {% endfor %}
+                  </span></th>
+              </tr>
+              {% endif %}
+              {% if film['premdate'] %}
+              <tr>
+                <th scope="col" style="color: white; ">Premiere date: <span style="font-weight: 100; color: white;">
+                    {{film['Premdate']}}
+                  </span></th>
+              </tr>
+              {% endif %}
+              {% if film['body'] %}
+              <tr>
+                <th scope="col" style="color: white;">{{ film["body"] }}
+                </th>
+              </tr>
+              {% endif %}
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th><a class="icon1" href="/favorite/{{film['id']}}"><img class="icon1" src="../static/star.svg"
+                      width="15%"></a>
+                  <div class="i1"><a style="color: white; " href="/favorite/{{film['id']}}">Add to Favorites</a></div>
+                </th>
+              </tr>
+​
+              <tr>
+                <th><a class="icon2 " href="/watchlater/{{film['id']}}"><img class="icon2" src="../static/watch.svg"
+                      width="15%"></a>
+                  <div class="i2"><a style="color: white; " href="/favorite/{{film['id']}}">Add to Watch Later</a></div>
+                </th>
+              </tr>
+​
+​
+              <tr>
+                <th class="nav-item dropdown">
+                  <a class="icon3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><img class="icon3"
+                      src="../static/plus.svg" width="15%"></a>
+                  <div role="button" data-toggle="dropdown"  role="button" class="i3"><a href="" style="color: white;">Add to a Flow</a></div>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/flows/add/{{film['id']}}">Create a new Flow</a>
+                    {% if list_names%}
+                    <div class="dropdown-divider"></div>
+                    {%endif%}
+                    {% for name in list_names %}
+                    <a class="dropdown-item"
+                      href="/flow/{{name['name']}}/add/{{film['id']}}">{{ name['name'] }}</a>
+                    {% endfor %}
+                  </div>
+                </th>
+​
+              </tr>
+              <tr>
+                <th scope="col" style="color: white;">
+                  {% if not rate %}
+                    <form>
+                      <div class="form-group">
+                        
+                        <select style="margin-bottom: 10px; width: 50%;" class="form-control" id="rating">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                        </select>
+                        <button type="button" class="btn btn-warning" onClick="rate()">Rate This Movie!</button>
+                      </div>
+                    </form>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" onClick='del()'>Delete Your Rate ({{rate}})</button>
+                    
+                    
+                    {% endif %}
+                    <div style="display: none;" id="movieid">{{film["id"]}}</div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+​
+​
+        </div>
+​
+​
+      </div>
+​
+    </div>
+​
+​
+  </div>
+</div>
+​
+​
+<div class="container revBack">
+  <div class="jumbotron revColor"
+    style="padding-top: 20px; margin-top: 50px; font-weight: bold; color: white; margin-bottom: 0;">
+    <h1 class="display-4">User Reviews</h1>
+    <p class="lead">Write a Review
+    </p>
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+      {{ form.review.label }}<br>
+      {{ form.review() }}<br>
+      {% for error in form.review.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      <br>
+      <p>{{ form.submit(class_='btn btn-warning') }}</p>
+    </form>
+    <hr class="my-4">
+    {% if reviews %}
+    
+​
+    
+    <div class="review"> 
+    {% for review in reviews%}
+    
+      <div class="singleRev shad">
+        <div>
+          <span><h5><a style="color: black;" href="/{{review['name']}}/profile">{{review['name']}}</a></h5><h6 class="mb-2 text-muted">{{review['date']}} ago</h6>
+          </span>
+            
+            <hr>
+            <span style="font-weight: 1;">{{review['body']}}</span>
+        </div>
+      </div>
+      
+      
+        {% endfor %}
+        
+     
+    </div>
+​
+    
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              
+              <a style="margin-right: 10px;" class="btn btn-warning {% if page == 1 %}btn disabled{% endif %} " href="?page={{page-1}}" aria-label="Previous">
+                  <span  aria-hidden="true">< Previous</span>
+              </a>
+              
+            </li>
+            <li class="page-item">
+              
+              <a class="btn btn-warning {% if page == pageCount %}btn disabled{% endif %} " href="?page={{page+1}}" aria-label="Previous">
+                  <span  aria-hidden="true">Next ></span>
+              </a>
+              
+            </li>
+      
+          
+          </ul>
+        </nav>
+    
+​
+      {% endif %}
+     
+    </div>
+  </div>
+​
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
+​
+​
+</div>
+  {% endblock %}

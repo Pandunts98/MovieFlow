@@ -1,0 +1,445 @@
+{% extends 'bootstrap/base.html' %}
+
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>MovieFlow</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+    <style>
+        body {
+            background-image: url('../static/background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: "Open Sans";
+        }
+        .well {
+          background-image: url('../../static/background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: "Open Sans";
+            min-height: 1000px;
+        }
+        .well2 {
+          background-image: url('../../static/unblured.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: "Open Sans";
+            min-height: 1000px;
+        }
+        .revBack {
+           background-image: url('../../static/unblured.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            
+        }
+        .revColor {
+          background-color: rgba(52, 58, 64, 0.9);
+        }
+        #menu {
+            background-image: url('static/collage1.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .carousel-inner {
+            font-size: 300%;
+        }
+        .breadcrumb, .breadcrumb-item .active {
+            background-color: #343a40;
+            color: white;
+        }
+        .jumbotron {
+            border-radius: 0%;
+            animation-duration: 1s;
+        }
+        .poster {
+            transition-duration: 2s;
+            
+        }
+        #well3 div {
+          display: block;
+          float: left;
+          width: 30%;
+        }
+        .review {
+          display: flex; 
+          flex-direction: row;
+          flex-wrap: wrap;
+          /* justify-content: space-between; */
+          width: 100%; 
+          border-radius: 10px;
+          padding-left: 30px;
+          padding-right: 30px;
+         
+        }
+        .singleRev {
+          width: 30%; 
+          background-color: #fdfaf3;
+          border-radius: 10px;
+          color: black;
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding: 20px;
+          margin-right: 32px;
+        }
+        .Rev {
+          background-color: #fdfaf3;
+          margin-bottom: 30px;
+          width: 30%; 
+          border-radius: 10px;
+          color: black;
+          padding: 20px;
+          margin-right: 30px;
+        }
+        .shad {
+          -webkit-box-shadow: 13px 14px 24px 4px rgba(0,0,0,0.75);
+          -moz-box-shadow: 13px 14px 24px 4px rgba(0,0,0,0.75);
+          box-shadow: 13px 14px 24px 4px rgba(0,0,0,0.75);
+        }
+        .warning {
+          width: 30%;
+          margin-top: 10px;
+          background-color: #fdfaf3;
+          border-radius: 10px;
+          color: black;
+          padding: 20px;
+        }
+        .searchFlex {
+          display: flex; 
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          width: 100%; 
+        }
+
+        .cardFlex {
+          width: 22%;
+          margin-right: 30px;
+        }
+        .actorWrap {
+          display: flex; 
+          flex-direction: row;
+          width: 100%; 
+          border-top-right-radius: 30px;
+          border-top-left-radius: 30px;
+          justify-content: space-between;
+        }
+        .actorFlex {
+          flex: 2;
+          
+        }
+        
+        /* .card:hover .poster {
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+            transform: scale(1.01);
+        } */
+        .carousel-item {
+            text-shadow: 10px 9px 6px #000000;
+            font-size: 150%;
+                    }
+
+        .icon1, .icon2, .icon3 {
+          transition-duration: 2s;
+            
+        }
+        .icon1:hover, .icon2:hover, .icon3:hover {
+          transform: rotate(360deg);
+        }
+
+        .i1, .i2, .i3 {
+          color: white;
+          width: auto;
+          max-width: 0%;
+          white-space: nowrap;
+          /*overflow: hidden;*/
+          transition: max-width 1s linear;
+          position: relative;
+          left: 55px;
+          bottom: 35px;
+        }
+        .icon1:hover + .i1 {
+          max-width: 100%;
+        }
+        .icon2:hover + .i2 {
+          max-width: 100%;
+        }
+        .icon3:hover + .i3 {
+          max-width: 100%;
+        }
+
+        .trailer {
+          margin-left: 20px;
+          margin-top: 20px;
+          font-size: 200%;
+          
+        }
+        .profb {
+          margin-left: 20px;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        /* Flip card */
+        .flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+.custom-select option {
+  margin: 50px;
+}
+.select-selected {
+  background-color: Red;
+}
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+/* This container is needed to position the front and back side */
+#flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+/* .flip-card:hover #flip-card-inner {
+  transform: rotateY(180deg);
+} */
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: #343a40;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+#img {
+  border: 2px solid white;
+  border-radius: 30px;
+}
+
+    </style>
+
+
+    {% endblock %}
+  </head>
+  <body>
+    {% block navbar %}
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" >
+        <a class="navbar-brand" href="/" style="color: #ffc107;">MovieFlow</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/" style="color: #ffc107;">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if session['__auth'] %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffc107;">
+                {{ session['__auth'] }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/{{session['__auth']}}/profile">Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/watchlater">Watch Later</a>
+                <a class="dropdown-item" href="/favorites">Favorites</a>
+                <a class="dropdown-item" href="/{{session['__auth']}}/flows">Flows</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+
+
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login" style="color: #ffc107;">Login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffc107;">
+                Discover
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/top">Top-Rated Movies</a>
+                <a class="dropdown-item" href="/highest-grossing">Highest-Grossing Movies</a>
+                <a class="dropdown-item" href="/popular">Popular Right Now</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Genres</a>
+              </div>
+            </li>
+
+          </ul>
+          <form class="form-inline" action="/search" method="GET" id="form1">
+            <div class="md-form my-0"></div>
+            <select form="form1", name="type", class="form-control mr-sm-2">
+              <option value="film">Films</option>
+              <option value="person">Celebritys</option>
+              <option value="user">Users</option>
+            </select>
+            <input type="text" id="query" name="query" placeholder="Search" class="form-control mr-sm-2">
+            </div>
+            <button  class="btn btn-warning btn-md" type="submit" form="form1" value="Submit">Search</button>
+
+          </form>
+
+
+        </div>
+    </nav>
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Genres</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="well3" action="/genres" method="GET">
+            <!-- <select class="mdb-select md-form" name="gen" id="gen" multiple>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="comedy">Comedy</option>
+              <option value="drama">Drama</option>
+            </select> -->
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="com" name="gen" value="comedy">
+            <label class="custom-control-label" for="com">Comedy</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="drama" name="gen" value="drama">
+            <label class="custom-control-label" for="drama">Drama</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="action" name="gen" value="action">
+            <label class="custom-control-label" for="action">Action</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="adventure" name="gen" value="adventure">
+            <label class="custom-control-label" for="adventure">Adventure</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="sci-Fi" name="gen" value="sci-Fi">
+            <label class="custom-control-label" for="sci-Fi">Sci-Fi</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="crime" name="gen" value="crime">
+            <label class="custom-control-label" for="crime">Crime</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="fantasy" name="gen" value="fantasy">
+            <label class="custom-control-label" for="fantasy">Fantasy</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="documentary" name="gen" value="documentary">
+            <label class="custom-control-label" for="documentary">Documentary</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="animation" name="gen" value="animation">
+            <label class="custom-control-label" for="animation">Animation</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="horror" name="gen" value="horror">
+            <label class="custom-control-label" for="horror">Horror</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="biography" name="gen" value="biography">
+            <label class="custom-control-label" for="biography">Biography</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="family" name="gen" value="family">
+            <label class="custom-control-label" for="family">Family</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="thriller" name="gen" value="thriller">
+            <label class="custom-control-label" for="thriller">Thriller</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="war" name="gen" value="war">
+            <label class="custom-control-label" for="war">War</label><br>
+
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="musical" name="gen" value="musical">
+            <label class="custom-control-label" for="musical">Musical</label><br>
+
+            </div>
+            <div style="margin-top: 10px;">
+              <button type="submit" class="btn btn-warning">Proceed</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+    {% endblock %}
+
+
+    <div id="content">{% block content %}{% endblock %}</div>
+
+
+
+  </body>
+</html>

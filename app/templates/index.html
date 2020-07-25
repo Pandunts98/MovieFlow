@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+
+
+
+{% block content %}
+
+<div class="container" style=" margin-top: 70px; margin-bottom: 30px;">
+    <div id="carouselExampleCaptions" style="border: solid #343a40 10px; border-radius: 17px;" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1" ></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div  class="carousel-inner">
+        <div onclick="location.href='/movie/188506'" class="carousel-item active">
+            <img src="../static/spiderman.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+  
+            <p>Spider-Man: Far From Home</p>
+            <h5>Discover the Fate of Peter Parker After the Events of 'Endgame'.</h5>
+        </div>
+        </div>
+        <div onclick="location.href='/movie/199393'"  class="carousel-item">
+            <img src="https://thecollision.org/wp-content/uploads/2020/01/maxresdefault.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            <p>1917</p>
+            <h5>Discover Sam Mendes' Latest Blockbaster.</h5>
+            </div>
+        </div>
+        <div onclick="location.href='/movie/190902'" class="carousel-item">
+            <img src="../static/parasite.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <p>Parasite</p>
+            <h5>Discover Bong Joon'ho's award-winning movie.</h5>
+            </div>
+        </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div> 
+
+<div class="jumbotron"  style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Welcome to MovieFlow!</h1>
+    <hr class="my-4">
+    <p>For more information about this website, click the button bellow.</p>
+    <a class="btn btn-warning btn-lg" role="button" data-toggle="modal" data-target="#learnMore">Learn more</a>
+  </div>
+
+<!-- Cards -->
+<div id="menu" style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container">
+        <div class="card-deck">
+            <div class="card shad text-white bg-dark mb-3" >
+                <img class="card-img-top poster" src="https://m.media-amazon.com/images/M/MV5BZjU0Yzk2MzEtMjAzYy00MzY0LTg2YmItM2RkNzdkY2ZhN2JkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_.jpg" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">Jojo Rabbit</h4>
+                <p class="card-text">Comedy, War</p>
+                <a href="/movie/156101" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card shad text-white bg-dark mb-3">
+                <img class="card-img-top poster" src="https://i.pinimg.com/originals/ac/2f/58/ac2f58d9275e2399279c1fda4220178c.jpg" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">Blade Runner 2049</h4>
+                <p class="card-text">Drama, Mystery</p>
+                <a href="movie/141921" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card shad text-white bg-dark mb-3">
+                <img class="card-img-top poster" src="https://m.media-amazon.com/images/M/MV5BY2QzYTQyYzItMzAwYi00YjZlLThjNTUtNzMyMDdkYzJiNWM4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">Little Women</h4>
+                <p class="card-text">Drama, Romance</p>
+                <a href="/movie/163126" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card shad text-white bg-dark mb-3">
+                <img class="card-img-top poster" src="https://www.digitalartsonline.co.uk/cmsdata/slideshow/3662115/baby-driver-rory-hi-res.jpg" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">Baby Driver</h4>
+                <p class="card-text">Crime, Drama</p>
+                <a href="/movie/169440" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+        
+
+        </div>
+    </div>
+</div>
+<!-- Cards finish -->
+
+<div class="jumbotron" style="background-color: #343a40; color: white; ">
+    <h1 class="display-4">Meet the Flows!</h1>
+    <p class="lead">Your personilized watch lists for every day and every mood! Create, share, and discover other user's favorite movies!</p>
+    <hr class="my-4">
+    <p>Take a look at this month's popular movies!</p>
+    <a class="btn btn-warning btn-lg" href="/popular">See What's Popular</a>
+  </div>
+
+  
+ <!-- Modal -->
+
+ <div class="modal fade" id="learnMore" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">What is a MovieFlow?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+              Movie flow is an opensource online platform for cinema lovers of any generation. Here you can find information about the best movies, write reviews, rank the movies, share your opinions and ideas with fellow movie lovers.         </div>
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Our community.</h5>
+          </div>
+          <div class="modal-body">
+            It is a community of movie enthusiasts who interact with each other. Share your movies with friends and discover the movies they love. You can publish your watchlist by creating a “Flow”.  The “Flow” is the list of movies that you create, you can either keep it private or share with other users to help them find new interesting movies.           </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">What we provide?</h5>
+          </div>
+          <div class="modal-body">
+            To use Movie Flow just register and dive in. We provide more than 200000 movies for any taste. Search for the movies to watch, explore new genres, discover new actors, directors and many other giants of movie industry. All this you can do using Movie Flow.           </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+ <!-- modalEnd -->
+
+
+
+
+{% endblock %}
+

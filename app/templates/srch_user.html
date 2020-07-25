@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+​
+​
+​
+​
+​
+{% block content %}
+​
+<div class="jumbotron animated fadeInDown" style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Search results for "{{q}}"</h1>
+    <p class="lead"> There are overal {{users|length}} search results for "{{q}}".   </p>
+</div>
+​
+​
+<div style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container searchFlex">
+​
+        
+        {% for user in users %}
+         
+          
+          <div class="cardFlex animated fadeInDown card shad text-white bg-dark mb-3" >
+                
+                <div class="card-body">
+                <h4 class="card-title">{{user['name']}}</h4>
+                <p class="card-text" style="font-size: 90%; color: #c9c9c9; margin-bottom: 2px;">Followers: {{ user['followers'] }}</p>
+                <p class="card-text" style="font-size: 90%; color: #c9c9c9;">Followings: {{ user['followings'] }}</p>
+                <a href="/{{user['name']}}/profile" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+​
+            {% endfor %}
+​
+        </div>
+​
+   
+    </div>
+</div>
+​
+​
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+
+
+
+{% block content %}
+
+<div class="jumbotron animated fadeInDown" style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Search results for {% for genre in genres %}{{genre}}{{ ", " if not loop.last }}{% endfor %} </h1>
+    <p class="lead"> There are total {{ filmsCount }} results for your query.  </p>
+ 
+    
+</div>
+
+<div style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container searchFlex">
+
+        
+            
+          {% for film in films %}
+          
+          <div class="cardFlex animated fadeInDown card text-white bg-dark mb-3" >
+                <img class="card-img-top poster" src="{{film['img']}}" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">{{film['title']}}</h4>
+                <p class="card-text">{{film['genres']}}</p>
+                <a href="/movie/{{film['id']}}" class="btn btn-warning">Learn More</a>
+                </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+   
+    </div>
+
+</div>
+
+<div class="jumbotron"  style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            
+            <a style="margin-right: 10px;" class="btn btn-warning {% if page == 1 %}btn disabled{% endif %} " href="?{% for genre in genres %}gen={{genre}}&{% endfor %}page={{page-1}}" aria-label="Previous">
+                <span  aria-hidden="true">< Previous</span>
+            </a>
+            
+          </li>
+          <li class="page-item">
+            
+            <a class="btn btn-warning {% if page == pageCount %}btn disabled{% endif %}{% if pageCount == 0 %}btn disabled{% endif %} " href="?{% for genre in genres %}gen={{genre}}&{% endfor %}page={{page+1}}" aria-label="Previous">
+                <span  aria-hidden="true">Next ></span>
+            </a>
+           
+                    
+
+
+                    
+          </li>
+    
+        
+        </ul>
+      </nav>
+  </div>
+
+
+{% endblock %}

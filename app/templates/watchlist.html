@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+​
+{% block content %}
+<div class="jumbotron animated fadeInDown"  style="background-color: #343a40; color: white; margin-bottom: 0;">
+    <h1 class="display-4">Flows</h1>
+    <p class="lead"></p>
+     {% if session['__auth']==username %}
+    <a href='/flows/add' class="btn btn-warning" role="button">Create a New Flow </a>
+    {% endif %}
+</div>
+​
+​<div style="padding-top: 40px; padding-bottom: 30px;">
+    <div class="container searchFlex">
+
+        
+            
+          {% for wl in watchlists %}
+          
+          <div style="padding-bottom: 20px; " class="cardFlex animated fadeInDown card shad text-white bg-dark mb-3" >
+                
+                <div class="card-body">
+                <h4 class="card-title">{{wl['name']}} </h4>
+                <p class="card-text">{{wl['body']}}</p>
+                
+                {% if session['__auth']==username %}
+                <div class="btn-group" style=" position: absolute;  bottom: 10px; left: 15px;">
+                    <a  href="/{{username}}/flow/{{wl['name']}}" style="color: black;" class="btn btn-warning">Open</a>
+                    <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" style="z-index: 3; position: relative;">
+                      <a class="dropdown-item" href="/flow/{{wl['name']}}/update">Edit</a>
+                      <a class="dropdown-item" href="/flow/{{wl['name']}}/delete">Delete</a>
+                    </div>
+                  </div>
+                
+                
+                <!-- <div><a style="width: 100%; margin-bottom: 5px;" href="/flow/{{wl['name']}}/update"  class="btn btn-info">Update</a></div>
+                    <div><a  style="width: 100%; margin-bottom: 5px;" href="/flow/{{wl['name']}}/delete" class="btn btn-danger">Delete</a></div> -->
+                {%else%}
+                <div class="btn-group" style=" position: absolute;  bottom: 10px; left: 15px;">
+                    <a  href="/{{username}}/flow/{{wl['name']}}" style="color: black;" class="btn btn-warning">Open</a>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+   
+    </div>
+</div>
+
+
+
+​
+​
+​
+​
+{% endblock %}
